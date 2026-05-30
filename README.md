@@ -4,6 +4,13 @@ A React Native mobile app built with [Expo SDK 54](https://docs.expo.dev/) that 
 
 The app is intended for **regular user accounts only** — admin and super-user roles are rejected at sign-in.
 
+### 🔗 Related Repositories
+
+- **Backend Template**: [FastAPI Backend Template](https://github.com/mobitrendz/fastapi-backend-template)
+
+- **React Frontend Template**: A companion frontend built with React 19, Vite, and Tailwind CSS. It is pre-configured to consume this API and handle its standardized error formats.
+    - [GitHub Repository](https://github.com/mobitrendz/react-frontend-template)
+
 ---
 
 ## Features
