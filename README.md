@@ -8,8 +8,7 @@ The app is intended for **regular user accounts only** — admin and super-user 
 
 - **Backend Template**: [FastAPI Backend Template](https://github.com/mobitrendz/fastapi-backend-template)
 
-- **React Frontend Template**: A companion frontend built with React 19, Vite, and Tailwind CSS. It is pre-configured to consume this API and handle its standardized error formats.
-    - [GitHub Repository](https://github.com/mobitrendz/react-frontend-template)
+- **React Frontend Template**: A companion frontend built with React 19, Vite, and Tailwind CSS. It is pre-configured to consume this API and handle its standardized error formats. [Frontend Template](https://github.com/mobitrendz/react-frontend-template)
 
 ---
 
