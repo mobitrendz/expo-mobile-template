@@ -11,8 +11,8 @@ const config: Config = {
     v4: true,
   },
 
-  url: 'https://example.com',
-  baseUrl: '/',
+  url: 'https://mobitrendz.github.io',
+  baseUrl: '/expo-mobile-template/',
 
   organizationName: 'mobitrendz',
   projectName: 'expo-mobile-template',
