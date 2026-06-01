@@ -6,7 +6,9 @@ Part of the **MobiTrendz** starter kit alongside the [React web frontend](https:
 
 ## Documentation
 
-Full documentation lives in the [`website/`](website/) folder ([Docusaurus](https://docusaurus.io/)):
+**Live documentation:** [https://mobitrendz.github.io/expo-mobile-template/](https://mobitrendz.github.io/expo-mobile-template/)
+
+The site is built with [Docusaurus](https://docusaurus.io/). Source lives in [`website/`](website/). To run locally:
 
 ```bash
 npm run docs        # Dev server → http://localhost:3000
