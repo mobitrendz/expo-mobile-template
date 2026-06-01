@@ -8,12 +8,18 @@ Part of the **MobiTrendz** starter kit alongside the [React web frontend](https:
 
 **Live documentation:** [https://mobitrendz.github.io/expo-mobile-template/](https://mobitrendz.github.io/expo-mobile-template/)
 
-The site is built with [Docusaurus](https://docusaurus.io/). Source lives in [`website/`](website/). To run locally:
+The site is built with [Docusaurus](https://docusaurus.io/). Source lives in [`website/`](website/).
+
+`website/build/` is **not committed** (it is in `.gitignore`). Pushes to `master` that change `website/` trigger [.github/workflows/deploy-docs.yml](.github/workflows/deploy-docs.yml), which builds the site and publishes it to GitHub Pages.
+
+**One-time GitHub setup:** Settings → Pages → **Build and deployment** → Source: **GitHub Actions**.
+
+To run locally:
 
 ```bash
 npm run docs        # Dev server → http://localhost:3000
 npm run docs:build  # Static build → website/build/
-npm run docs:serve  # Preview production build
+npm run docs:serve  # Preview production build (uses /expo-mobile-template/ base path)
 ```
 
 Guides cover getting started, API configuration, authentication, tasks, profile, API client generation, native builds, and troubleshooting.
