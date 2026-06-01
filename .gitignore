@@ -39,3 +39,8 @@ yarn-error.*
 # generated native folders
 /ios
 /android
+
+# Docusaurus
+website/node_modules/
+website/build/
+website/.docusaurus/

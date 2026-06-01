@@ -7,7 +7,10 @@
     "android": "expo run:android",
     "ios": "expo run:ios",
     "web": "expo start --web",
-    "generate-api": "openapi-ts"
+    "generate-api": "openapi-ts",
+    "docs": "npm --prefix website start",
+    "docs:build": "npm --prefix website build",
+    "docs:serve": "npm --prefix website run serve"
   },
   "dependencies": {
     "@hey-api/client-fetch": "^0.13.1",
