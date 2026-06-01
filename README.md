@@ -10,7 +10,7 @@ Part of the **MobiTrendz** starter kit alongside the [React web frontend](https:
 
 The site is built with [Docusaurus](https://docusaurus.io/). Source lives in [`website/`](website/).
 
-`website/build/` is **not committed** (it is in `.gitignore`). Pushes to `main` or `develop` that change `website/` trigger [.github/workflows/deploy-docs.yml](.github/workflows/deploy-docs.yml), which builds the site and publishes it to GitHub Pages.
+`website/build/` is **not committed** (it is in `.gitignore`). Pushes to `master` that change `website/` trigger [.github/workflows/deploy-docs.yml](.github/workflows/deploy-docs.yml), which builds the site and publishes it to GitHub Pages.
 
 **One-time GitHub setup:** Settings → Pages → **Build and deployment** → Source: **GitHub Actions**.
 
