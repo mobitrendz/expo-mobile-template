@@ -1,46 +1,52 @@
 # Expo Mobile Template
 
-A React Native mobile app built with [Expo SDK 54](https://docs.expo.dev/) that connects to a FastAPI backend. It provides user authentication, a full-featured todo/task manager, and a profile screen for account management.
+A React Native mobile app built with [Expo SDK 54](https://docs.expo.dev/versions/v54.0.0/) that connects to the [MobiTrendz FastAPI Backend Template](https://github.com/mobitrendz/fastapi-backend-template). It provides user authentication, a full-featured todo/task manager, and a profile screen for account management.
 
-The app is intended for **regular user accounts only** — admin and super-user roles are rejected at sign-in.
+Part of the **MobiTrendz** starter kit alongside the [React web frontend](https://github.com/mobitrendz/react-frontend-template). The app is intended for **regular user accounts only** — `admin` and `super` roles are rejected at sign-in.
 
-### 🔗 Related Repositories
+## Documentation
 
-- **Backend Template**: [FastAPI Backend Template](https://github.com/mobitrendz/fastapi-backend-template)
+Full documentation lives in the [`website/`](website/) folder ([Docusaurus](https://docusaurus.io/)):
 
-- **React Frontend Template**: A companion frontend built with React 19, Vite, and Tailwind CSS. It is pre-configured to consume this API and handle its standardized error formats. [Frontend Template](https://github.com/mobitrendz/react-frontend-template)
+```bash
+npm run docs        # Dev server → http://localhost:3000
+npm run docs:build  # Static build → website/build/
+npm run docs:serve  # Preview production build
+```
 
----
+Guides cover getting started, API configuration, authentication, tasks, profile, API client generation, native builds, and troubleshooting.
+
+## Related repositories
+
+| Project | Description |
+|---------|-------------|
+| [FastAPI Backend Template](https://github.com/mobitrendz/fastapi-backend-template) | REST API, JWT auth, OpenAPI spec (`openapi.json` source) |
+| [React Frontend Template](https://github.com/mobitrendz/react-frontend-template) | React 19 + Vite + Tailwind web client for the same API |
 
 ## Features
 
 ### Authentication
+
 - Sign in and sign up
-- JWT bearer token stored in AsyncStorage
-- Automatic session restore on app launch
+- JWT bearer token in AsyncStorage
+- Automatic session restore on launch
 - Sign out
 
-### Todo / Task management
+### Todo / task management
+
 - List todos with pull-to-refresh
-- Create tasks with all fields:
-  - Title
-  - Description
-  - Priority (Low / Medium / High)
-  - Status (Pending / In progress / Completed)
-  - Due date & time
-- Edit existing tasks
-- Tap a task to cycle its status
-- Delete tasks with a confirmation dialog
-- Modal-based create/edit forms
+- Create and edit tasks (modal) with title, description, priority, status, due date & time
+- Tap a task to cycle status (pending → in progress → completed)
+- Delete with confirmation dialog
+- Platform-aware date pickers (iOS spinner; Android date + time steps)
 
 ### Profile
+
 - Open by tapping your name on the home screen
 - Edit full name and email
 - Change password
 - Delete account (with confirmation)
 - Sign out
-
----
 
 ## Tech stack
 
@@ -48,26 +54,13 @@ The app is intended for **regular user accounts only** — admin and super-user 
 |-------|------------|
 | Framework | Expo ~54, React Native 0.81, React 19 |
 | Language | TypeScript |
-| API client | [@hey-api/openapi-ts](https://heyapi.dev/) (generated from OpenAPI spec) |
+| API client | [@hey-api/openapi-ts](https://heyapi.dev/) (from `openapi.json`) |
 | HTTP | `@hey-api/client-fetch` |
 | Storage | `@react-native-async-storage/async-storage` |
 | Date picker | `@react-native-community/datetimepicker` |
-| Backend | REST API (FastAPI-style, `/api/v1` prefix) |
+| Backend | REST API, `/api/v1` prefix |
 
----
-
-## Prerequisites
-
-- **Node.js** 18+ (LTS recommended)
-- **npm**
-- **Expo Go** app on a physical device, or:
-  - **Android Studio** + Android SDK (for native Android builds)
-  - **Xcode** (for native iOS builds, macOS only)
-- A running backend instance compatible with `openapi.json`
-
----
-
-## Getting started
+## Quick start
 
 ### 1. Clone and install
 
@@ -79,9 +72,9 @@ npm install
 
 ### 2. Configure the API URL
 
-The backend **root URL** (host + port only — no `/api/v1` suffix) can be set in one of these ways:
+Set the backend **root URL** (host + port only — no `/api/v1` suffix):
 
-**Option A — `app.json` (recommended for builds)**
+**`app.json` (recommended for builds)**
 
 ```json
 {
@@ -93,93 +86,73 @@ The backend **root URL** (host + port only — no `/api/v1` suffix) can be set i
 }
 ```
 
-**Option B — environment variable**
+**Environment variable**
 
 ```bash
 export EXPO_PUBLIC_API_URL=http://192.168.1.100:8000
 ```
 
-**Option C — default fallback**
-
-If neither is set, the app falls back to `http://macbook.local:8000` (see `src/constants/config.ts`).
-
-#### API URL by environment
+**Fallback:** `http://macbook.local:8000` in `src/constants/config.ts` if neither is set.
 
 | Environment | Example URL |
 |-------------|-------------|
-| Production | `https://mobitrendz.onrender.com/` |
+| Production (default) | `https://mobitrendz.onrender.com/` |
 | iOS Simulator | `http://localhost:8000` |
 | Android Emulator | `http://10.0.2.2:8000` |
-| Physical device (Expo Go) | `http://<your-computer-lan-ip>:8000` |
+| Physical device (Expo Go) | `http://<your-lan-ip>:8000` |
 
-> The generated API client automatically prefixes all routes with `/api/v1`.
+The generated client adds `/api/v1` to every route automatically.
 
-### 3. Start the development server
+### 3. Run the app
 
 ```bash
 npm start
 ```
 
-Then press:
-- `a` — open on Android emulator
-- `i` — open on iOS simulator
-- Scan the QR code — open in Expo Go on a physical device
+Then press `a` (Android), `i` (iOS), or scan the QR code with Expo Go.
 
----
-
-## Available scripts
+## Scripts
 
 | Command | Description |
 |---------|-------------|
-| `npm start` | Start the Expo development server |
-| `npm run android` | Build and run on Android (`expo run:android`) |
-| `npm run ios` | Build and run on iOS (`expo run:ios`) |
-| `npm run web` | Start for web |
-| `npm run generate-api` | Regenerate the TypeScript API client from `openapi.json` |
-
----
+| `npm start` | Expo development server |
+| `npm run android` | Native Android build (`expo run:android`) |
+| `npm run ios` | Native iOS build (`expo run:ios`) |
+| `npm run web` | Expo web |
+| `npm run generate-api` | Regenerate `src/client/` from `openapi.json` |
+| `npm run docs` | Docusaurus dev server |
+| `npm run docs:build` | Build documentation site |
+| `npm run docs:serve` | Serve built documentation |
 
 ## Project structure
 
 ```
 expo-mobile-template/
-├── App.tsx                 # Root navigator (auth → todos / profile)
-├── app.json                # Expo config (API URL, icons, bundle IDs)
-├── openapi.json            # OpenAPI spec (source for API client)
-├── openapi-ts.config.ts    # @hey-api/openapi-ts configuration
-├── assets/                 # App icon, splash, favicon, Android adaptive icons
-├── src/
-│   ├── api/
-│   │   └── client.ts       # Configured HTTP client + auth token injection
-│   ├── client/             # Auto-generated API SDK (do not edit manually)
-│   ├── constants/
-│   │   └── config.ts       # API base URL resolution
-│   ├── context/
-│   │   └── AuthContext.tsx # Auth state, login/signup/logout
-│   ├── lib/
-│   │   ├── api-error.ts    # User-friendly API error messages
-│   │   └── auth-storage.ts # JWT persistence in AsyncStorage
-│   └── screens/
-│       ├── LoginScreen.tsx
-│       ├── TodoListScreen.tsx
-│       └── ProfileScreen.tsx
-├── android/                # Native Android project (generated via prebuild)
-└── ios/                    # Native iOS project (generated via prebuild)
+├── App.tsx                 # Auth gate + todos / profile navigation
+├── app.json                # Expo config, API URL, icons, bundle IDs
+├── openapi.json            # OpenAPI spec
+├── openapi-ts.config.ts    # Codegen config
+├── assets/                 # Icons and splash
+├── website/                # Docusaurus docs
+└── src/
+    ├── api/client.ts       # HTTP client + JWT injection
+    ├── client/             # Generated SDK (do not edit)
+    ├── constants/config.ts # API base URL
+    ├── context/AuthContext.tsx
+    ├── lib/                # api-error, auth-storage
+    └── screens/            # Login, TodoList, Profile
 ```
 
----
+Native `android/` and `ios/` are gitignored — generate with `npx expo prebuild`.
 
-## API client generation
-
-The API client in `src/client/` is generated from `openapi.json`. To regenerate after backend changes:
+## API client
 
 ```bash
 npm run generate-api
 ```
 
-Configuration is in `openapi-ts.config.ts`:
-
 ```ts
+// openapi-ts.config.ts
 export default defineConfig({
   input: './openapi.json',
   output: './src/client',
@@ -187,120 +160,45 @@ export default defineConfig({
 });
 ```
 
----
-
 ## Native builds
 
-Native `android/` and `ios/` folders are listed in `.gitignore`. Generate them with:
-
 ```bash
-npx expo prebuild
+npx expo prebuild          # or: npx expo prebuild --clean
+npm run android            # package: com.mobitrendz.expomobiletemplate
+npm run ios                # bundle: com.anonymous.expomobiletemplate
 ```
 
-For a clean regeneration:
+If Gradle cannot find Node, set `nodeExecutable` in `android/gradle.properties` or launch Android Studio from a terminal. See [Native builds](website/docs/development/native-builds.md) in the docs.
 
-```bash
-npx expo prebuild --clean
-```
-
-### Android
-
-```bash
-npm run android
-# or
-npx expo run:android
-```
-
-**Android Studio sync:** If Gradle cannot find `node`, add this to `android/gradle.properties`:
-
-```properties
-nodeExecutable=/usr/local/bin/node
-```
-
-Use your actual Node path (e.g. `/opt/homebrew/bin/node` on Apple Silicon).
-
-Alternatively, launch Android Studio from a terminal so it inherits your shell `PATH`:
-
-```bash
-open -a "Android Studio"
-```
-
-**Package name:** `com.mobitrendz.expomobiletemplate`
-
-### iOS
-
-```bash
-npm run ios
-# or
-npx expo run:ios
-```
-
-**Bundle identifier:** `com.anonymous.expomobiletemplate`
-
----
-
-## App configuration reference
+## Configuration snapshot
 
 | Setting | Value |
 |---------|-------|
-| App name | expo-mobile-template |
 | Primary color | `#2563eb` |
-| Orientation | Portrait |
-| Hermes | Enabled |
-| New Architecture | Enabled |
-| Edge-to-edge (Android) | Enabled |
-| Cleartext HTTP (Android) | Enabled (for local dev) |
 | Default API | `https://mobitrendz.onrender.com/` |
-
-Icons and splash assets live in `assets/`:
-- `icon.png` — 1024×1024 app icon
-- `splash-icon.png` — splash screen logo
-- `android-icon-foreground.png`, `android-icon-background.png`, `android-icon-monochrome.png` — Android adaptive icon
-- `favicon.png` — web favicon
-
----
-
-## Authentication flow
-
-1. User signs in or signs up via `LoginScreen`
-2. Backend returns a JWT `access_token`
-3. Token is saved to AsyncStorage and attached to all API requests via `src/api/client.ts`
-4. On launch, a stored token is restored and `/api/v1/login/current-user` is called
-5. Only users with role `user` are allowed; admin/super accounts are rejected
-
----
+| Android package | `com.mobitrendz.expomobiletemplate` |
+| iOS bundle ID | `com.anonymous.expomobiletemplate` |
+| Hermes / New Architecture | Enabled |
 
 ## Troubleshooting
 
-### Cannot reach the API / network errors
-- Confirm the backend is running
-- Use the correct URL for your device (see [API URL by environment](#api-url-by-environment))
-- On Android emulator, use `10.0.2.2` instead of `localhost`
-- On a physical device, use your computer's LAN IP, not `localhost`
+| Issue | Fix |
+|-------|-----|
+| Network / API unreachable | Correct URL per environment; Android emulator → `10.0.2.2` |
+| `expo-constants` Kotlin error | `npx expo install expo-constants` (~18.x on SDK 54) |
+| Gradle autolinking | Regenerate Android project; configure Node path |
+| Package version drift | `npx expo install <package>` |
 
-### `expo-constants` Kotlin compile error
-Ensure `expo-constants` matches your Expo SDK version:
+More detail: [Troubleshooting](website/docs/reference/troubleshooting.md).
 
-```bash
-npx expo install expo-constants
-```
+## Contributing
 
-Do **not** install `expo-constants@55` on Expo SDK 54 — use `~18.x`.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup, conventions, and pull request guidelines.
 
-### Gradle autolinking warning
-If you see `Autolinking is not set up in settings.gradle`, ensure:
-- `android/settings.gradle` includes the Expo autolinking setup
-- Node.js path is configured for Android Studio (see [Android](#android))
+## Security
 
-### Expo package version mismatches
-Always align native module versions with your SDK:
-
-```bash
-npx expo install <package-name>
-```
-
----
+See [SECURITY.md](SECURITY.md) for supported versions and how to report vulnerabilities responsibly.
 
 ## License
 
-Private project.
+[MIT](LICENSE) © MobiTrendz
